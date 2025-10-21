@@ -1,0 +1,130 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Movie;
+use App\Http\Requests\StoreMovieRequest;
+use App\Http\Requests\UpdateMovieRequest;
+
+class MovieController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+
+        $movies = Movie::all();
+
+
+        return view('movies',['movies' => $movies]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('post-movie');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+//    public function store(StoreMovieRequest $request)
+    public function store()
+    {
+        //dd(request()->title);
+
+        //
+
+
+        $movieAttributes = request()->validate([
+            'title'=>['required'],
+            'description'=>['required'],
+            'genre'=>['required'],
+            'poster'=>['required'],
+            'title'=>['required'],
+            'trailer_link'=>['required'],
+            'download_link'=>['required'],
+
+        ]);
+
+         $posterPath = request()->file('poster')->store('posters','public');
+         $movieAttributes['poster'] = $posterPath;
+
+
+
+
+         $moviePath = request()->file('download_link')->store('movies' ,'public');
+         $movieAttributes['download_link'] = $moviePath;
+
+        Movie::create($movieAttributes);
+
+        return redirect('/movies');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Movie $movie)
+    {
+        return view('movie-page' , ['movie' => $movie]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Movie $movie)
+    {
+ 
+        return view('edit-movie',['movie'=>$movie]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+//    public function update(UpdateMovieRequest $request, Movie $movie)
+    public function update(Movie $movie)
+    {
+       // dd(request()->title);
+       // dd($movie);
+
+       $posterPath = request()->file('poster')->store('posters','public');
+       $moviePath = request()->file('download_link')->store('movies' ,'public');
+       
+       $movie->update([
+        'title'=>request('title'),
+        'description'=>request('description'),
+        'genre'=>request('genre'),
+        'poster'=>$posterPath,
+        'trailer_link'=>request('trailer_link'),
+        'download_link'=>$moviePath,
+       ]);
+
+       return redirect('/movies');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Movie $movie)
+    {
+        //dd($movie);
+
+        $movie->delete();
+
+        return redirect('/movies');
+        
+    }
+
+
+    public function download(Movie $movie){
+
+
+        $filePath = storage_path('app/public/'.$movie->download_link);
+        $fileName = basename($movie->title);
+
+        return response()->download($filePath , $fileName);
+    }
+}
