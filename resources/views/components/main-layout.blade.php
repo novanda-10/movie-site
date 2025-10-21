@@ -15,8 +15,12 @@
             <a href="/movies">movies</a>
             <a href="/series">series</a>
             <a href="/artists">artists</a>
+            @auth
+                @if (Auth::user()->role === 'admin')
+                    <a href="/postmovie">post new movie</a>
+                @endif
+            @endauth
 
-            <a href="/postmovie">post new movie</a>
 
         </nav>
 

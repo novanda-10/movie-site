@@ -14,4 +14,7 @@
             </div>
         </div>
     </div>
+
+    <a href="/" class="px-60">home page</a>
+
 </x-app-layout>

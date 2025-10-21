@@ -32,18 +32,27 @@ Route::get('/movies' , [MovieController::class,'index']);
 Route::get('/movies/{movie}', [MovieController::class , 'show']);
 
 
-Route::get('/postmovie' , [MovieController::class, 'create']);
+// Route::get('/postmovie' , [MovieController::class, 'create'])->middleware(['auth' ,'admin']);
 
 
-Route::post('/postmovie' , [MovieController::class, 'store']);
+Route::middleware('admin')->group(function () {
+    Route::get('/postmovie' , [MovieController::class, 'create']);
 
 
-Route::get('/movies/{movie}/editmovie' , [MovieController::class, 'edit']);
+    Route::post('/postmovie' , [MovieController::class, 'store']);
 
 
-Route::post('/movies/{movie}/editmovie' , [MovieController::class, 'update']);
+    Route::get('/movies/{movie}/editmovie' , [MovieController::class, 'edit']);
 
-Route::delete('/movies/{movie}/deletemovie' , [MovieController::class, 'destroy']);
+
+    Route::post('/movies/{movie}/editmovie' , [MovieController::class, 'update']);
+
+    Route::delete('/movies/{movie}/deletemovie' , [MovieController::class, 'destroy']);
+
+});
+
+
+
 
 Route::get('/movies/{movie}/download' , [MovieController::class, 'download']);
 
