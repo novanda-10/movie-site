@@ -15,6 +15,9 @@
                 <div>
                 genre:{{$movie->genre}}
                 </div>
+                <div>
+                    <img src="{{asset('storage/'.$movie->poster) }}" alt="" >
+                </div>
         </a>
 
     </div>
