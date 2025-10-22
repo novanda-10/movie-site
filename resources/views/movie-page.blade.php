@@ -14,32 +14,41 @@ if (Str::contains($movie->trailer_link, 'https://www.youtube.com/')) {
 
 
 <x-main-layout>
-    
-    <div>
-        {{$movie->title}}
-    </div>
-    <div>
-        {{$movie->description}}
-    </div>
-    <div>
-        {{$movie->genre}}
+    <div class="flex flex-row gap-72">
+        <div>
+            {{-- left --}}
+            <div>
+                {{$movie->title}}
+            </div>
+            <div>
+                {{$movie->description}}
+            </div>
+            <div>
+                {{$movie->genre}}
+            </div>
+
+
+            <div class="mt-5 mb-5">
+                <video src="{{asset('storage/'.$movie->download_link) }}" controls></video>
+            </div>
+            <div>
+                <a href="/movies/{{$movie->id}}/download"            class="px-6 py-3 bg-blue-700 text-white font-medium rounded-lg 
+                    hover:bg-blue-800 transition-colors duration-300 shadow-md">download</a>
+            </div>
+        </div>
+        <div> 
+            {{-- right --}}
+            <div>
+
+                <img src="{{asset('storage/'.$movie->poster) }}" alt="" >
+            </div>
+
+            <div>
+
+                <iframe src="{{$trailerUrl}}" frameborder="2" allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
 
-    <div>
-
-        <iframe src="{{$trailerUrl}}" frameborder="2" allowfullscreen></iframe>
-    </div>
-
-    <div>
-
-        <img src="{{asset('storage/'.$movie->poster) }}" alt="" >
-    </div>
-
-    <div>
-        <video src="{{asset('storage/'.$movie->download_link) }}" controls></video>
-    </div>
-    <div>
-        <a href="/movies/{{$movie->id}}/download">download</a>
-    </div>
 
 </x-main-layout>

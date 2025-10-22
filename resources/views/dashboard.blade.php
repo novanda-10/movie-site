@@ -15,6 +15,12 @@
         </div>
     </div>
 
-    <a href="/" class="px-60">home page</a>
+    <div class="flex justify-center mt-4">
+        <a href="/" 
+           class="px-6 py-3 bg-blue-700 text-white font-medium rounded-lg 
+                  hover:bg-blue-800 transition-colors duration-300 shadow-md">
+            Home Page
+        </a>
+    </div>
 
 </x-app-layout>

@@ -29,7 +29,7 @@
 
                 <form action="/search">
                 
-                    <input type="text" name="q" placeholder="movie name" class=" bg-gray-800">
+                    <input type="text" name="q" placeholder="movie name" class=" bg-gray-800 rounded-md">
                     <button>search</button>
                 </form>
             
