@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
@@ -62,5 +63,14 @@ Route::get('/search' , [SearchController::class, 'search']);
 
 
 Route::get('/genres/{genre}' , [GenreController::class, 'show']);
+
+
+Route::get('/artists' , [ArtistController::class, 'index']);
+
+
+
+Route::get('/artists/{artist}' , [ArtistController::class, 'show']);
+
+
 
 

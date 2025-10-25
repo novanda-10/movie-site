@@ -14,11 +14,20 @@ class GenreSeeder extends Seeder
     public function run(): void
     {
         //Genre::factory(4)->create();
-        Genre::create(['name' => 'action']);
-        Genre::create(['name' => 'comedy']);
-        Genre::create(['name' => 'drama']);
-        Genre::create(['name' => 'fantasy']);
+        Genre::create(['name' => 'Action']);
+        Genre::create(['name' => 'Horror']);
+        Genre::create(['name' => 'Thriller']);
+        Genre::create(['name' => 'Drama']);
+        Genre::create(['name' => 'Western']);
+        Genre::create(['name' => 'Animation']);
+        Genre::create(['name' => 'Comedy']);
+        Genre::create(['name' => 'Romance']);
+        Genre::create(['name' => 'Fantasy']);
+        Genre::create(['name' => 'War']);
+        Genre::create(['name' => 'Martial Arts']);
         Genre::create(['name' => 'sci-fi']);
+        Genre::create(['name' => 'Adventure']);
+        Genre::create(['name' => 'Short']);
         
 
     }

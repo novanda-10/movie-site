@@ -24,7 +24,7 @@ if (Str::contains($movie->trailer_link, 'https://www.youtube.com/')) {
                 {{$movie->description}}
             </div>
             <div>
-                <div class="text-sm text-gray-300">
+                <div class="text-gray-300">
                     Genre: <span>                
                         @foreach ($movie->genres as $genre)
                         <x-genre :genre="$genre"></x-genre> 
@@ -32,6 +32,12 @@ if (Str::contains($movie->trailer_link, 'https://www.youtube.com/')) {
                 </span>
             </div>
 
+            <div>
+                Artists:
+                @foreach ($movie->artists as $artist)
+                    <x-artist :artist="$artist"></x-artist>
+                @endforeach
+            </div>
 
             <div class="mt-5 mb-5">
                 <video src="{{asset('storage/'.$movie->download_link) }}" controls></video>

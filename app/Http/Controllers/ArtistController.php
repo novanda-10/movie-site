@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Genre;
-use App\Http\Requests\StoreGenreRequest;
-use App\Http\Requests\UpdateGenreRequest;
+use App\Models\Artist;
+use App\Http\Requests\StoreArtistRequest;
+use App\Http\Requests\UpdateArtistRequest;
 
-class GenreController extends Controller
+class ArtistController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $artists = Artist::all();
 
+        return view('artists', ['artists'=>$artists]);
     }
 
     /**
@@ -27,7 +29,7 @@ class GenreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGenreRequest $request)
+    public function store(StoreArtistRequest $request)
     {
         //
     }
@@ -35,17 +37,18 @@ class GenreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Genre $genre)
+    public function show(Artist $artist)
     {
 
-       // dd($genre->movies);
-        return view('genre-page' , ['genre'=>$genre]);
+//        dd($artist->movies());
+
+        return view('artist-movies',['artist'=>$artist]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Genre $genre)
+    public function edit(Artist $artist)
     {
         //
     }
@@ -53,7 +56,7 @@ class GenreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGenreRequest $request, Genre $genre)
+    public function update(UpdateArtistRequest $request, Artist $artist)
     {
         //
     }
@@ -61,8 +64,9 @@ class GenreController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Genre $genre)
+    public function destroy(Artist $artist)
     {
         //
     }
+
 }
