@@ -19,7 +19,7 @@ class MovieFactory extends Factory
         return [
             'title'=>fake()->name(),
             'description'=>fake()->sentence(3),
-            'genre'=>fake()->randomElement(['action','drama','fantasy']),
+//            'genre'=>fake()->randomElement(['action','drama','fantasy']),
             'poster'=>fake()->imageUrl(),
             'trailer_link'=>fake()->url(),
             'download_link'=>fake()->url(),

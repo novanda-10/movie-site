@@ -24,7 +24,12 @@ if (Str::contains($movie->trailer_link, 'https://www.youtube.com/')) {
                 {{$movie->description}}
             </div>
             <div>
-                {{$movie->genre}}
+                <div class="text-sm text-gray-300">
+                    Genre: <span>                
+                        @foreach ($movie->genres as $genre)
+                        <x-genre :genre="$genre"></x-genre> 
+                         @endforeach
+                </span>
             </div>
 
 

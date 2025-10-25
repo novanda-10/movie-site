@@ -13,8 +13,15 @@
             <div class="text-sm text-gray-400">
                 Description: {{ $movie->description }}
             </div>
-            <div class="text-sm text-blue-300">
-                Genre: <span class="text-gray-300">{{ $movie->genre }}</span>
+            <div class="text-sm text-gray-300">
+                Genre: <span>                
+                    @foreach ($movie->genres as $genre)
+                    <x-genre :genre="$genre"></x-genre> 
+                     @endforeach
+            </span>
+
+
+
             </div>
 
 

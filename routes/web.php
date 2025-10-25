@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -57,3 +58,9 @@ Route::middleware('admin')->group(function () {
 Route::get('/movies/{movie}/download' , [MovieController::class, 'download']);
 
 Route::get('/search' , [SearchController::class, 'search']);
+
+
+
+Route::get('/genres/{genre}' , [GenreController::class, 'show']);
+
+
