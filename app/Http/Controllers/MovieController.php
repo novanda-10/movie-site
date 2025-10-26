@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use App\Models\Artist;
+use App\Models\Genre;
+
+use function PHPUnit\Framework\isNull;
 
 class MovieController extends Controller
 {
@@ -25,7 +29,10 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('post-movie');
+        $genres = Genre::all();
+        $artists = Artist::all();
+
+        return view('post-movie' , ['genres'=>$genres , 'artists'=>$artists]);
     }
 
     /**
@@ -39,10 +46,11 @@ class MovieController extends Controller
         //
 
 
+
         $movieAttributes = request()->validate([
             'title'=>['required'],
             'description'=>['required'],
-            'genre'=>['required'],
+//            'genre'=>['required'],
             'poster'=>['required'],
             'title'=>['required'],
             'trailer_link'=>['required'],
@@ -59,7 +67,11 @@ class MovieController extends Controller
          $moviePath = request()->file('download_link')->store('movies' ,'public');
          $movieAttributes['download_link'] = $moviePath;
 
-        Movie::create($movieAttributes);
+      $movie = Movie::create($movieAttributes);
+
+
+      $movie->genres()->attach(request()->genres);
+      $movie->artists()->attach(request()->artists);
 
         return redirect('/movies');
     }
@@ -77,8 +89,10 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
- 
-        return view('edit-movie',['movie'=>$movie]);
+        $genres = Genre::all();
+        $artists = Artist::all();
+
+        return view('edit-movie',['movie'=>$movie , 'genres'=>$genres ,'artists'=>$artists]);
     }
 
     /**
@@ -87,20 +101,27 @@ class MovieController extends Controller
 //    public function update(UpdateMovieRequest $request, Movie $movie)
     public function update(Movie $movie)
     {
-       // dd(request()->title);
-       // dd($movie);
 
-       $posterPath = request()->file('poster')->store('posters','public');
-       $moviePath = request()->file('download_link')->store('movies' ,'public');
+       if (request()->hasFile('poster')) {
+        $posterPath = request()->file('poster')->store('posters','public');
+       }
+
+       if (request()->hasFile('download_link')) {
+        $moviePath = request()->file('download_link')->store('movies' ,'public');
+       }
+
+
        
        $movie->update([
         'title'=>request('title'),
         'description'=>request('description'),
-        'genre'=>request('genre'),
-        'poster'=>$posterPath,
         'trailer_link'=>request('trailer_link'),
-        'download_link'=>$moviePath,
+        'poster'=>$posterPath ?? $movie->poster,
+        'download_link'=>$moviePath ?? $movie->download_link,
        ]);
+
+       $movie->genres()->sync(request()->genres);
+       $movie->artists()->sync(request()->artists);
 
        return redirect('/movies');
     }

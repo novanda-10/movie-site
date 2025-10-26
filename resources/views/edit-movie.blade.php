@@ -12,13 +12,10 @@
         <input type="text" name="description" id="description" 
         value="{{$movie->description}}">
 
-        <label for="genre">genre</label>
-        <input type="text" name="genre" id="genre"
-        value="{{$movie->genre}}">
 
 
         <label for="poster">poster</label>
-        <input type="file" name="poster" id="poster" value="{{$movie->poster}} >
+        <input type="file" name="poster" id="poster">
 
 
         <label for="trailer_link" >trailer link</label>
@@ -27,6 +24,21 @@
 
         <label for="download_link">download link</label>
         <input type="file" name="download_link" id="download_link">
+
+        <label for="">Select genres</label>
+        <div>
+            @foreach ($genres as $genre)
+                <input type="checkbox" name="genres[]" value="{{$genre->id}}">{{$genre->name}}
+            @endforeach
+        </div>
+
+        <label for="">Select artists</label>
+        <div>
+            @foreach ($artists as $atrist)
+                <input type="checkbox" name="artists[]" value="{{$atrist->id}}">{{$atrist->name}}
+            @endforeach
+        </div>
+
 
         <button type="submit" >edit movie</button>
 
