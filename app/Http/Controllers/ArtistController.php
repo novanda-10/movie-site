@@ -15,7 +15,7 @@ class ArtistController extends Controller
     {
        // $artists = Artist::all();//n+1
 
-        $artists = Artist::with('movies')->get();//eager loading
+        $artists = Artist::with('movies')->paginate(5);//eager loading
 
         return view('artists', ['artists'=>$artists]);
     }

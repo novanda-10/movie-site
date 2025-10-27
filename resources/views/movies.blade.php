@@ -11,5 +11,8 @@
 
 
         @endforeach
+        
+        {{-- Pagination links --}}
+        {{$movies->links()}}
     </div>
 </x-main-layout>

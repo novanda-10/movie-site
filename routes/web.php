@@ -61,6 +61,7 @@ Route::get('/movies/{movie}/download' , [MovieController::class, 'download']);
 Route::get('/search' , [SearchController::class, 'search']);
 
 
+Route::get('/genres' , [GenreController::class, 'index']);
 
 Route::get('/genres/{genre}' , [GenreController::class, 'show']);
 

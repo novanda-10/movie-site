@@ -19,7 +19,7 @@ class MovieController extends Controller
     {
 
         //$movies = Movie::all();
-        $movies = Movie::with(['genres' ,'artists'])->get();
+        $movies = Movie::with(['genres' ,'artists'])->paginate(5);
 
 
 

@@ -14,6 +14,7 @@
             <a href="/">home page</a>
             <a href="/movies">movies</a>
             <a href="/artists">artists</a>
+            <a href="/genres">genres</a>
             @auth
                 @if (Auth::user()->role === 'admin')
                     <a href="/postmovie">post new movie</a>

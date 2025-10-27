@@ -9,7 +9,7 @@ class SearchController extends Controller
 {
     public function search(){
         
-        $movies=Movie::where('title', 'Like','%'.request('q').'%')->get();
+        $movies=Movie::with(['genres','artists'])->where('title', 'Like','%'.request('q').'%')->paginate(5);
 
         return view('movies',['movies'=>$movies]);
     }

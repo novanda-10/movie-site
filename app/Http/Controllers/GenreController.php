@@ -13,7 +13,9 @@ class GenreController extends Controller
      */
     public function index()
     {
+        $genres = Genre::with('movies')->get();
 
+        return view('genres' , ['genres'=>$genres]);
     }
 
     /**
