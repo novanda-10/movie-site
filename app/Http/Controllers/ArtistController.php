@@ -13,7 +13,9 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        $artists = Artist::all();
+       // $artists = Artist::all();//n+1
+
+        $artists = Artist::with('movies')->get();//eager loading
 
         return view('artists', ['artists'=>$artists]);
     }

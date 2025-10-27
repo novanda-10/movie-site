@@ -18,7 +18,9 @@ class MovieController extends Controller
     public function index()
     {
 
-        $movies = Movie::all();
+        //$movies = Movie::all();
+        $movies = Movie::with(['genres' ,'artists'])->get();
+
 
 
         return view('movies',['movies' => $movies]);
@@ -29,8 +31,12 @@ class MovieController extends Controller
      */
     public function create()
     {
-        $genres = Genre::all();
-        $artists = Artist::all();
+       // $genres = Genre::all();
+       // $artists = Artist::all();
+        $genres = Genre::with('movies')->get();
+        $artists = Artist::with('movies')->get();
+
+
 
         return view('post-movie' , ['genres'=>$genres , 'artists'=>$artists]);
     }
@@ -89,8 +95,12 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        $genres = Genre::all();
-        $artists = Artist::all();
+        // $genres = Genre::all();
+        // $artists = Artist::all();
+
+        $genres = Genre::with('movies')->get();
+        $artists = Artist::with('movies')->get();
+
 
         return view('edit-movie',['movie'=>$movie , 'genres'=>$genres ,'artists'=>$artists]);
     }
