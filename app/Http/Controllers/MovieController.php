@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Artist;
 use App\Models\Genre;
+use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\isNull;
 
@@ -142,6 +143,16 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
         //dd($movie);
+
+
+        if ($movie->poster) {
+            Storage::disk('public')->delete($movie->poster);
+        }
+
+
+        if ($movie->download_link) {
+            Storage::disk('public')->delete($movie->download_link);
+        }
 
         $movie->delete();
 
