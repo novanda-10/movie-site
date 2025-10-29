@@ -26,7 +26,9 @@
 
 
             @auth
-                @if (Auth::user()->role === 'admin')
+                @can('admin')
+                    
+    
                     <div class="flex items-center gap-3 pt-3">
                         <a href="/movies/{{ $movie->id }}/editmovie"
                            class="px-3 py-1 text-sm text-blue-100 bg-blue-700 rounded-lg 
@@ -45,7 +47,7 @@
                             </button>
                         </form>
                     </div>
-                @endif
+                @endcan
             @endauth
         </a>
 

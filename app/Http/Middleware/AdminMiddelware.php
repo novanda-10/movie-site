@@ -17,9 +17,12 @@ class AdminMiddelware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (!Auth::check() || Auth::user()->role !=='admin') {
-            abort(403);
-        }
+
+        //not using this anymore . using Gate(AuthServiseProvider(admin)) instead 
+
+        // if (!Auth::check() || Auth::user()->role !=='admin') {
+        //     abort(403);
+        // }
         
         return $next($request);
     }

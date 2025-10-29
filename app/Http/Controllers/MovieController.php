@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Artist;
 use App\Models\Genre;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\isNull;
@@ -32,6 +33,9 @@ class MovieController extends Controller
      */
     public function create()
     {
+
+
+
        // $genres = Genre::all();
        // $artists = Artist::all();
         $genres = Genre::with('movies')->get();
@@ -88,6 +92,8 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
+
+
         return view('movie-page' , ['movie' => $movie]);
     }
 
@@ -96,6 +102,11 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
+
+        // if (!Gate::allows('admin')) {
+        //     abort(403);
+        // }
+        
         // $genres = Genre::all();
         // $artists = Artist::all();
 
