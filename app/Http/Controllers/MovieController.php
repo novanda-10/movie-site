@@ -34,6 +34,7 @@ class MovieController extends Controller
     public function create()
     {
 
+        $this->authorize('create');//policy
 
 
        // $genres = Genre::all();
@@ -52,6 +53,8 @@ class MovieController extends Controller
 //    public function store(StoreMovieRequest $request)
     public function store()
     {
+
+        $this->authorize('create');//policy
         //dd(request()->title);
 
         //
@@ -103,12 +106,18 @@ class MovieController extends Controller
     public function edit(Movie $movie)
     {
 
+        $this->authorize('update',$movie);//policy
+
         // if (!Gate::allows('admin')) {
         //     abort(403);
         // }
         
         // $genres = Genre::all();
         // $artists = Artist::all();
+
+
+
+
 
         $genres = Genre::with('movies')->get();
         $artists = Artist::with('movies')->get();
@@ -123,6 +132,9 @@ class MovieController extends Controller
 //    public function update(UpdateMovieRequest $request, Movie $movie)
     public function update(Movie $movie)
     {
+
+        $this->authorize('update',$movie);//policy
+
 
        if (request()->hasFile('poster')) {
         $posterPath = request()->file('poster')->store('posters','public');
@@ -153,6 +165,9 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
+
+        $this->authorize('delete',$movie);//policy
+
         //dd($movie);
 
 
