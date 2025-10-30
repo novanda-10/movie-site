@@ -1,0 +1,1 @@
+Congrats {{$user->name}} ! welcome to our movie site

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use App\Mail\WelcomeMail;
 use App\Models\Artist;
 use App\Models\Genre;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\isNull;
@@ -31,10 +34,10 @@ class MovieController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+public function create()
     {
 
-        $this->authorize('create');//policy
+        $this->authorize('create',Movie::class);//policy
 
 
        // $genres = Genre::all();
@@ -54,7 +57,7 @@ class MovieController extends Controller
     public function store()
     {
 
-        $this->authorize('create');//policy
+        $this->authorize('create',Movie::class);//policy
         //dd(request()->title);
 
         //
@@ -86,6 +89,8 @@ class MovieController extends Controller
 
       $movie->genres()->attach(request()->genres);
       $movie->artists()->attach(request()->artists);
+
+
 
         return redirect('/movies');
     }

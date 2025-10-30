@@ -5,6 +5,8 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -64,6 +66,15 @@ Route::get('/artists' , [ArtistController::class, 'index']);
 
 
 Route::get('/artists/{artist}' , [ArtistController::class, 'show']);
+
+
+
+// Route::get('/test' , function (){
+
+//     Mail::to('zzz@zz.com')->send(new WelcomeMail);
+
+//     return 'dooone';
+// });
 
 
 
