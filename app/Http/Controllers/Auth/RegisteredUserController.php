@@ -49,6 +49,7 @@ class RegisteredUserController extends Controller
 
         Mail::to(Auth::user()->email)->send(new WelcomeMail($user));//send a welcome mail (i added this)
 
+
         return redirect(route('dashboard', absolute: false));
     }
 }

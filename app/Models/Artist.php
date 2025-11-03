@@ -10,6 +10,7 @@ class Artist extends Model
     /** @use HasFactory<\Database\Factories\ArtistFactory> */
     use HasFactory;
 
+    protected $guarded = [];
 
     public function movies(){
         return $this->belongsToMany(Movie::class);

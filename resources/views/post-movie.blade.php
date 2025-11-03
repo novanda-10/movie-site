@@ -40,6 +40,9 @@
 
         <button type="submit" >add movie</button>
 
+
+        <a href="/api">api button</a>
+
     </form>
 
 

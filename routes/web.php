@@ -68,6 +68,15 @@ Route::get('/artists' , [ArtistController::class, 'index']);
 Route::get('/artists/{artist}' , [ArtistController::class, 'show']);
 
 
+Route::get('/api' , [MovieController::class, 'apiform']);
+
+Route::post('/api' , [MovieController::class, 'apipost']);
+
+
+Route::post('/api/crateMovieFromApi' , [MovieController::class, 'crateMovieFromApi']);
+
+
+
 
 // Route::get('/test' , function (){
 

@@ -10,6 +10,7 @@ use App\Models\Artist;
 use App\Models\Genre;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +25,7 @@ class MovieController extends Controller
     {
 
         //$movies = Movie::all();
-        $movies = Movie::with(['genres' ,'artists'])->paginate(5);
+        $movies = Movie::with(['genres' ,'artists'])->paginate(10);
 
 
 
@@ -199,5 +200,117 @@ public function create()
         $fileName = basename($movie->title);
 
         return response()->download($filePath , $fileName);
+    }
+
+    public function apiform(){
+        
+        return view('api');
+    }
+
+
+
+    
+    public function apipost(){
+        
+       // dd(request()->title);
+
+        // $response = Http::get('http://www.omdbapi.com/?apikey=b72123c0&t=green
+        // +mile&y=1999');
+
+
+        $response = Http::get('http://www.omdbapi.com/',[
+            'apikey'=>'b72123c0',
+            't'=>request()->title,
+            'y'=>request()->year,
+        ]);
+
+        $data = $response->json();
+
+     //   dd($data);
+
+     $genreString = $data['Genre'];
+
+     $genres = array_map('trim',explode(',' , $genreString));
+
+ //               dd($data['Actors']);
+
+
+
+     $artistString = $data['Actors'];
+
+     $artists = array_map('trim',explode(',' , $artistString));
+                
+
+        return view('showapimovie',['data'=>$data , 'genres'=>$genres , 'artists'=>$artists]);
+    }
+
+
+
+    public function crateMovieFromApi() {
+        //dd(request()->all());
+
+       // dd(request()->poster);
+
+       //dd(request()->genres);
+
+
+       
+
+        $response = Http::get(request()->poster);
+
+      //  dd($response->status(), strlen($response->body()));
+
+        $filename = 'poster_'. time().'.jpg';
+
+        Storage::disk('public')->put('posters/' .$filename, $response->body());
+
+        $posterPath = 'posters/'.$filename;
+
+        $moviePath = request()->file('download_link')->store('movies' ,'public');
+      
+        //dd($posterPath);
+
+        //dd($posterPath);
+
+        //genre and actors
+
+       $movie = Movie::create([
+            'title' => request()->title,
+            'description' => request()->description,
+            'poster' => $posterPath,
+            'trailer_link' => request()->trailer_link,
+            'download_link' => $moviePath,
+        ]);
+
+
+       // dd($movie);
+
+
+        $genres=request()->genres;
+
+        $genreIds = [];
+        foreach ($genres as $name) {
+         $genre = Genre::firstOrCreate(['name'=> $name]);
+         $genreIds[] = $genre->id;
+        }
+ 
+      //  dd($genreIds);
+      $movie->genres()->sync($genreIds);
+
+ 
+ 
+      $artists=request()->artists;
+ 
+      $artistIds = [];
+      foreach ($artists as $name) {
+       $artist = artist::firstOrCreate(['name'=> $name]);
+       $artistIds[] = $artist->id;
+      }
+ 
+      $movie->artists()->sync($artistIds);
+     //  dd($artistIds);
+
+
+     return redirect('/movies');
     }
 }
