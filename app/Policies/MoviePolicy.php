@@ -26,30 +26,31 @@ class MoviePolicy
     //     return false;
     // }
 
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        return $user->role ==='admin';
-    }
+    ////////////////////////////// gate is enough not need for policy
+    // /**
+    //  * Determine whether the user can create models.
+    //  */
+    // public function create(User $user): bool
+    // {
+    //     return $user->role ==='admin';
+    // }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Movie $movie): bool
-    {
-        return $user->role ==='admin';
-    }
+    // /**
+    //  * Determine whether the user can update the model.
+    //  */
+    // public function update(User $user, Movie $movie): bool
+    // {
+    //     return $user->role ==='admin';
+    // }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Movie $movie): bool
-    {
-        return $user->role ==='admin';
-    }
-
+    // /**
+    //  * Determine whether the user can delete the model.
+    //  */
+    // public function delete(User $user, Movie $movie): bool
+    // {
+    //     return $user->role ==='admin';
+    // }
+////////////////////////////////////////////
     /**
      * Determine whether the user can restore the model.
      */

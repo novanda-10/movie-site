@@ -1,7 +1,7 @@
 <x-main-layout>
-    apiiii
+    
 
-    <form action="/api" method="post" class="text-blue-500">
+    <form action="/postmovie/baseapiform" method="post" class="text-blue-500">
     @csrf
         <label for="title">title</label>
         <input type="text" name="title" id="title">

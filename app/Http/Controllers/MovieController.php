@@ -38,7 +38,7 @@ class MovieController extends Controller
 public function create()
     {
 
-        $this->authorize('create',Movie::class);//policy
+    //    $this->authorize('create',Movie::class);//policy
 
 
        // $genres = Genre::all();
@@ -58,7 +58,7 @@ public function create()
     public function store()
     {
 
-        $this->authorize('create',Movie::class);//policy
+    //    $this->authorize('create',Movie::class);//policy
         //dd(request()->title);
 
         //
@@ -112,7 +112,7 @@ public function create()
     public function edit(Movie $movie)
     {
 
-        $this->authorize('update',$movie);//policy
+    //    $this->authorize('update',$movie);//policy
 
         // if (!Gate::allows('admin')) {
         //     abort(403);
@@ -139,7 +139,7 @@ public function create()
     public function update(Movie $movie)
     {
 
-        $this->authorize('update',$movie);//policy
+    //    $this->authorize('update',$movie);//policy
 
 
        if (request()->hasFile('poster')) {
@@ -172,7 +172,7 @@ public function create()
     public function destroy(Movie $movie)
     {
 
-        $this->authorize('delete',$movie);//policy
+    //    $this->authorize('delete',$movie);//policy
 
         //dd($movie);
 
@@ -202,15 +202,15 @@ public function create()
         return response()->download($filePath , $fileName);
     }
 
-    public function apiform(){
+    public function baseApiForm(){
         
-        return view('api');
+        return view('base-api-form');
     }
 
 
 
     
-    public function apipost(){
+    public function fetchApi(){
         
        // dd(request()->title);
 
@@ -241,12 +241,12 @@ public function create()
      $artists = array_map('trim',explode(',' , $artistString));
                 
 
-        return view('showapimovie',['data'=>$data , 'genres'=>$genres , 'artists'=>$artists]);
+        return view('confirm-api-movie',['data'=>$data , 'genres'=>$genres , 'artists'=>$artists]);
     }
 
 
 
-    public function crateMovieFromApi() {
+    public function createMovieFromApi() {
         //dd(request()->all());
 
        // dd(request()->poster);

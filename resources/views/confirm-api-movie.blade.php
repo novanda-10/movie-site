@@ -1,6 +1,6 @@
 <x-main-layout>
 
-    <form action="/api/crateMovieFromApi" method="post" enctype="multipart/form-data" class="text-blue-500 flex flex-col">
+    <form action="/postmovie/createmoviefromapi" method="post" enctype="multipart/form-data" class="text-blue-500 flex flex-col">
         @csrf
 
         <label for="title">title</label>

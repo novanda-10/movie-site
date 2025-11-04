@@ -3,6 +3,8 @@
     <form action="/postmovie" method="post" enctype="multipart/form-data" class="text-blue-500 flex flex-col">
         @csrf
 
+        <a href="/postmovie/baseapiform" class="flex justify-center mb-10">autofill the fildes(use api)</a>
+
         <label for="title">title</label>
         <input type="text" name="title" id="title">
 
@@ -41,7 +43,7 @@
         <button type="submit" >add movie</button>
 
 
-        <a href="/api">api button</a>
+
 
     </form>
 

@@ -46,6 +46,13 @@ Route::get('/movies/{movie}', [MovieController::class , 'show']);
     Route::post('/movies/{movie}/editmovie' , [MovieController::class, 'update']);
     Route::delete('/movies/{movie}/deletemovie' , [MovieController::class, 'destroy']);
 
+
+    Route::get('/postmovie/baseapiform' , [MovieController::class, 'baseApiForm']);
+
+    Route::post('/postmovie/baseapiform' , [MovieController::class, 'fetchApi']);
+
+    Route::post('/postmovie/createmoviefromapi' , [MovieController::class, 'createMovieFromApi']);
+
  });
 
 
@@ -68,12 +75,7 @@ Route::get('/artists' , [ArtistController::class, 'index']);
 Route::get('/artists/{artist}' , [ArtistController::class, 'show']);
 
 
-Route::get('/api' , [MovieController::class, 'apiform']);
 
-Route::post('/api' , [MovieController::class, 'apipost']);
-
-
-Route::post('/api/crateMovieFromApi' , [MovieController::class, 'crateMovieFromApi']);
 
 
 
