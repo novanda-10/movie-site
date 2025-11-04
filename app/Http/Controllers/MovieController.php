@@ -219,12 +219,23 @@ public function create()
 
 
         $response = Http::get('http://www.omdbapi.com/',[
-            'apikey'=>'b72123c0',
+            'apikey'=>env('OMDB_API_KEY'),
             't'=>request()->title,
             'y'=>request()->year,
         ]);
 
-        $data = $response->json();
+
+
+        if ($response->successful()) {
+            $data = $response->json();
+        } else {
+            $data = ['error' => 'Failed to fetch data from OMDB API'];
+
+            dd('Failed to fetch data from OMDB API');
+
+        }
+
+
 
      //   dd($data);
 
