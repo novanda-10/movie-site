@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        Mail::to(Auth::user()->email)->send(new WelcomeMail($user));//send a welcome mail (i added this)
+        // Mail::to(Auth::user()->email)->send(new WelcomeMail($user));//send a welcome mail (i added this) connted this for now for testing deploymernt
 
 
         return redirect(route('dashboard', absolute: false));
