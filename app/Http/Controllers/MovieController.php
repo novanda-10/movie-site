@@ -197,7 +197,7 @@ public function create()
 
 
         $filePath = storage_path('app/public/'.$movie->download_link);
-        $fileName = basename($movie->title);
+        $fileName = basename($movie->title.'.mp4');
 
         return response()->download($filePath , $fileName);
     }

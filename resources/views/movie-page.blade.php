@@ -49,7 +49,7 @@ if (Str::contains($movie->trailer_link, 'https://www.youtube.com/')) {
         </div>
         <div> 
             {{-- right --}}
-            <div>
+            <div class="mt-5">
 
                 <img src="{{asset('storage/'.$movie->poster) }}" alt="" >
             </div>
