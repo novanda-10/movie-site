@@ -2,7 +2,7 @@
 
 <x-main-layout>
     <h1>
-        show moviesss
+         movies
     </h1>
 
     <div>
